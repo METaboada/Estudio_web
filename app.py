@@ -1,5 +1,11 @@
 import streamlit as st
 
+st.set_page_config(
+    page_title="Estudio Web",
+    page_icon="favicon.png",  # o un emoji, por ejemplo "🚀"
+    layout="wide"
+)
+
 # ---- LOGIN ----
 if "autenticado" not in st.session_state:
     st.session_state["autenticado"] = False

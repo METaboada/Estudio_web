@@ -25,3 +25,5 @@ if not st.session_state["autenticado"]:
             st.error("❌ Usuario o contraseña incorrectos")
 
     st.stop()  # No se muestra nada más si no está autenticado
+
+

@@ -1,4 +1,6 @@
 import streamlit as st
+import mysql.connector
+import pandas as pd
 
 
 # --- Configuración inicial ---
@@ -22,6 +24,20 @@ def mostrar_home():
 
 
 
+# def mostrar_clientes():
+#     st.title("👥 Clientes")
+#     st.write("Esta es la página de inicio.")
+
+#     if st.button("⬅️ Volver al inicio", key="btn_volver_clientes"):
+#         st.session_state["pagina"] = "Home"
+#         st.rerun()
+
+#     # Boton con un buscador para seleccionar clientes de una tabla de mysql
+#     st.write("Buscador de clientes")
+#     cliente = st.text_input("Buscar cliente")
+#     if cliente:
+#         st.write(f"Buscando cliente: {cliente}")
+
 def mostrar_clientes():
     st.title("👥 Clientes")
     st.write("Esta es la página de inicio.")
@@ -30,12 +46,41 @@ def mostrar_clientes():
         st.session_state["pagina"] = "Home"
         st.rerun()
 
-    # Boton con un buscador para seleccionar clientes de una tabla de mysql
     st.write("Buscador de clientes")
-    cliente = st.text_input("Buscar cliente")
-    if cliente:
-        st.write(f"Buscando cliente: {cliente}")
+    cliente = st.text_input("Buscar cliente (nombre o CUIT)")
 
+    if cliente:
+        try:
+            # Conexión usando los secrets de Streamlit Cloud
+            conexion = mysql.connector.connect(
+                host=st.secrets["mysql"]["host"],
+                user=st.secrets["mysql"]["user"],
+                password=st.secrets["mysql"]["password"],
+                database=st.secrets["mysql"]["database"]
+            )
+
+            cursor = conexion.cursor(dictionary=True)
+
+            query = """
+                SELECT * FROM clientes 
+                WHERE nombre LIKE %s OR cuit LIKE %s
+            """
+            like_pattern = f"%{cliente}%"
+            cursor.execute(query, (like_pattern, like_pattern))
+            resultados = cursor.fetchall()
+
+            if resultados:
+                df = pd.DataFrame(resultados)
+                st.write(f"🔍 Resultados para: **{cliente}**")
+                st.dataframe(df)
+            else:
+                st.warning("No se encontraron clientes que coincidan con la búsqueda.")
+
+            cursor.close()
+            conexion.close()
+
+        except mysql.connector.Error as e:
+            st.error(f"❌ Error al conectar con la base de datos: {e}")
 
 
 def mostrar_admin():

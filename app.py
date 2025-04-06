@@ -69,9 +69,6 @@ def mostrar_clientes():
             cursor.execute(query, (like_pattern, like_pattern))
             resultados = cursor.fetchall()
 
-            st.write("🔁 Resultado crudo de la consulta:")
-            st.write(resultados)  # <-- Esto nos dice si trajo algo
-
             if resultados:
                 df = pd.DataFrame(resultados)
                 st.write(f"🔍 Resultados para: **{cliente}**")

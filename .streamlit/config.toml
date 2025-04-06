@@ -1,0 +1,11 @@
+[server]
+headless = true
+port = 8501
+enableCORS = false
+
+[theme]
+base = "light"
+
+[general]
+# Acá indicás qué archivo usar como entrada principal
+target = "Home.py"

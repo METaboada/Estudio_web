@@ -1,6 +1,5 @@
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
+
 
 # --- Configuración inicial ---
 st.set_page_config(page_title="Estudio Web",

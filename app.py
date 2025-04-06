@@ -115,6 +115,11 @@ def mostrar_home():
 
 def mostrar_reportes():
     st.title("📊 Reportes")
+
+    if st.button("⬅️ Volver al inicio"):
+        st.session_state["pagina"] = "Home"
+        st.rerun()
+
     df = pd.DataFrame({
         "Mes": ["Enero", "Febrero", "Marzo", "Abril"],
         "Ventas": [12000, 15000, 13000, 17000]
@@ -126,18 +131,19 @@ def mostrar_reportes():
     ax.set_title("Ventas mensuales")
     st.pyplot(fig)
 
-    if st.button("⬅️ Volver al inicio"):
-        st.session_state["pagina"] = "Home"
-        st.rerun()
+
 
 
 def mostrar_admin():
-    st.title("⚙️ Administración")
-    st.write("Opciones de configuración y control del sistema.")
-
+    
     if st.button("⬅️ Volver al inicio"):
         st.session_state["pagina"] = "Home"
         st.rerun()
+
+    st.title("⚙️ Administración")
+    st.write("Opciones de configuración y control del sistema.")
+
+
 
 
 def menu_sidebar():

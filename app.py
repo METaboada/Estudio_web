@@ -20,6 +20,7 @@ if not st.session_state["autenticado"]:
         if usuario == st.secrets["auth"]["usuario"] and clave == st.secrets["auth"]["clave"]:
             st.session_state["autenticado"] = True
             st.success("✅ Bienvenido, acceso concedido")
+            st.experimental_rerun()  # <--- Esto es lo que te faltaba
             
         else:
             st.error("❌ Usuario o contraseña incorrectos")

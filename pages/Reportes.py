@@ -7,23 +7,28 @@ if "autenticado" not in st.session_state or not st.session_state["autenticado"]:
     st.warning("⚠️ No estás autenticado. Volvé a la página principal.")
     st.stop()
 
-# ---- CONTENIDO DE LA PÁGINA DE REPORTES ----
+# ---- TÍTULO Y ENCABEZADO ----
 st.title("📊 Reportes")
+st.markdown("En esta sección podés visualizar el resumen de ventas mensuales.")
 
-st.subheader("Resumen de ventas")
+# ---- DATAFRAME DEMO ----
+st.subheader("📅 Ventas por Mes")
 
-# Ejemplo de dataframe demo
 df = pd.DataFrame({
     "Mes": ["Enero", "Febrero", "Marzo", "Abril"],
     "Ventas": [12000, 15000, 13000, 17000]
 })
 
-# Mostrar tabla
 st.dataframe(df, use_container_width=True)
 
-# Graficar
-fig, ax = plt.subplots()
-ax.plot(df["Mes"], df["Ventas"], marker='o')
-ax.set_title("Ventas mensuales")
-ax.set_ylabel("Monto")
+# ---- GRÁFICO LINEAL ----
+st.subheader("📈 Evolución de Ventas")
+
+fig, ax = plt.subplots(figsize=(8, 4))
+ax.plot(df["Mes"], df["Ventas"], marker='o', color='royalblue', linestyle='-')
+ax.set_title("Ventas Mensuales", fontsize=14)
+ax.set_ylabel("Monto en $", fontsize=12)
+ax.set_xlabel("Mes", fontsize=12)
+ax.grid(True, linestyle="--", alpha=0.5)
+
 st.pyplot(fig)

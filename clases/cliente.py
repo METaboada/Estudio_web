@@ -31,9 +31,14 @@ class Cliente:
         self.nombase = nombase
         self.ruta_base = ruta_base
         self.rutabackup = rutabackup
-
+    
     def mostrar_resumen(self):
-        return f"{self.nombre} ({self.cuit})"
+        return f"""
+        **Domicilio**: {self.domicilio}  
+        **Carpeta**: {self.carpeta}  
+        **Base de datos**: {self.nombase}  
+        **Punto de venta**: {self.ptovta}  
+        """
 
     def validar_cuit(self):
         return self.cuit.isdigit() and len(self.cuit) == 11

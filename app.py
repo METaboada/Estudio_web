@@ -73,7 +73,7 @@ def mostrar_clientes():
                 df = pd.DataFrame(resultados)
                 st.write(f"🔍 Resultados para: **{cliente}**")
                 # st.dataframe(df)
-                st.dataframe(df, use_container_width=True, hide_index=True)
+                st.dataframe(df, hide_index=True)
             else:
                 st.warning("No se encontraron clientes que coincidan con la búsqueda.")
 

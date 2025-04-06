@@ -62,7 +62,7 @@ def mostrar_clientes():
             cursor = conexion.cursor(dictionary=True)
 
             query = """
-                SELECT * FROM clientes 
+                SELECT id_cliente, nombre, cuit FROM clientes 
                 WHERE nombre LIKE %s OR cuit LIKE %s
             """
             like_pattern = f"%{cliente}%"
@@ -72,7 +72,8 @@ def mostrar_clientes():
             if resultados:
                 df = pd.DataFrame(resultados)
                 st.write(f"🔍 Resultados para: **{cliente}**")
-                st.dataframe(df)
+                # st.dataframe(df)
+                st.dataframe(df, use_container_width=True, hide_index=True)
             else:
                 st.warning("No se encontraron clientes que coincidan con la búsqueda.")
 

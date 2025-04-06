@@ -20,7 +20,7 @@ if not st.session_state["autenticado"]:
         if usuario in usuarios and clave == usuarios[usuario]:
             st.session_state["autenticado"] = True
             st.session_state["pagina"] = "Home"
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("❌ Usuario o contraseña incorrectos")
     st.stop()

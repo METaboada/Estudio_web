@@ -7,5 +7,4 @@ enableCORS = false
 base = "light"
 
 [general]
-# Acá indicás qué archivo usar como entrada principal
 target = "Home.py"

@@ -10,11 +10,10 @@ st.set_page_config(page_title="Estudio Web",
 # --- Funciones por página ---
 def mostrar_home():
     st.title("🏢 Estudio Taboada")
-
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("📊 Ir a Reportes"):
-            st.session_state["pagina"] = "Reportes"
+        if st.button("👥 Clientes"):
+            st.session_state["pagina"] = "Clientes"
             st.rerun()
     with col2:
         if st.button("⚙️ Ir a Admin"):
@@ -26,6 +25,10 @@ def mostrar_home():
 def mostrar_clientes():
     st.title("👥 Clientes")
     st.write("Esta es la página de inicio.")
+
+    if st.button("⬅️ Volver al inicio"):
+        st.session_state["pagina"] = "Home"
+        st.rerun()
 
     # Boton con un buscador para seleccionar clientes de una tabla de mysql
     st.write("Buscador de clientes")
@@ -47,6 +50,8 @@ def mostrar_admin():
 
 def menu_sidebar():
     st.sidebar.title("📚 Menú")
+    if st.sidebar.button("🏢 Estudio Taboada"):
+        st.session_state["pagina"] = "Home"
     if st.sidebar.button("👥 Clientes"):
         st.session_state["pagina"] = "Clientes"
     if st.sidebar.button("⚙️ Admin"):

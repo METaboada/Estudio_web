@@ -1,8 +1,8 @@
 
 import streamlit as st
-from pages.home import mostrar_home
-from pages.clientes import mostrar_clientes
-from pages.admin import mostrar_admin
+from pantallas.home import mostrar_home
+from pantallas.clientes import mostrar_clientes
+from pantallas.admin import mostrar_admin
 from components.sidebar import menu_sidebar
 
 st.set_page_config(page_title="Estudio Web", page_icon="favicon.png", layout="centered")

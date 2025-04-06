@@ -6,9 +6,22 @@ st.set_page_config(
     layout="centered"
 )
 
-# ---- INICIALIZAR SESSION_STATE ----
-if "autenticado" not in st.session_state:
-    st.session_state["autenticado"] = False
+# # ---- INICIALIZAR SESSION_STATE ----
+# if "autenticado" not in st.session_state:
+#     st.session_state["autenticado"] = False
+
+if "autenticado" not in st.session_state or not st.session_state["autenticado"]:
+    # Ocultar barra lateral y menú superior hasta que esté autenticado
+    hide_menu = """
+        <style>
+        [data-testid="stSidebar"] {display: none;}
+        header {visibility: hidden;}
+        </style>
+    """
+    st.markdown(hide_menu, unsafe_allow_html=True)
+
+
+
 
 # ---- LOGIN ----
 if not st.session_state["autenticado"]:

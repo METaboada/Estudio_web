@@ -22,6 +22,16 @@ import streamlit as st
 from utils.db import obtener_clientes
 from clases.cliente import Cliente
 
+
+def mostrar_resumen(self):
+    return f"""
+    **Domicilio**: {self.domicilio}  
+    **Carpeta**: {self.carpeta}  
+    **Base de datos**: {self.nombase}  
+    **Punto de venta**: {self.ptovta}  
+    """
+
+
 def mostrar_clientes():
     st.title("📁 Gestión de Clientes")
 
@@ -66,11 +76,3 @@ def mostrar_clientes():
         with st.expander(f"🧾 {cliente.nombre} ({cliente.cuit})"):
             st.markdown(cliente.mostrar_resumen())
 
-
-    def mostrar_resumen(self):
-        return f"""
-        **Domicilio**: {self.domicilio}  
-        **Carpeta**: {self.carpeta}  
-        **Base de datos**: {self.nombase}  
-        **Punto de venta**: {self.ptovta}  
-        """

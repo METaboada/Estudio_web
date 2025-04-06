@@ -24,16 +24,27 @@ if not st.session_state["autenticado"]:
     usuario = st.text_input("Usuario")
     clave = st.text_input("Contraseña", type="password")
     if st.button("Ingresar"):
-        if usuario == st.secrets["auth"]["usuario"] and clave == st.secrets["auth"]["clave"]:
+        # if usuario == st.secrets["auth"]["usuario"] and clave == st.secrets["auth"]["clave"]:
+        #     st.session_state["autenticado"] = True
+        #     st.rerun()
+        # else:
+        #     st.error("❌ Usuario o contraseña incorrectos")
+
+        usuarios_validos = st.secrets["auth"]["usuarios"]
+
+        if usuario in usuarios_validos and clave == usuarios_validos[usuario]:
             st.session_state["autenticado"] = True
+            st.session_state["usuario"] = usuario  # Guardamos el usuario logueado
             st.rerun()
         else:
             st.error("❌ Usuario o contraseña incorrectos")
+
     st.stop()
 
 # --- MENÚ INTERNO PERSONALIZADO ---
 st.title("🏠 Estudio Web")
 menu = st.radio("Navegá por la aplicación", ["Inicio", "Reportes"], horizontal=True)
+st.sidebar.write(f"👤 Usuario: {st.session_state['usuario']}")
 
 # --- CONTENIDO SEGÚN SELECCIÓN ---
 if menu == "Inicio":

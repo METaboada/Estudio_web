@@ -34,8 +34,8 @@ class Cliente:
     
     def mostrar_resumen(self):
         return f"""
-        **Clave ARCA**: {self.clave_fiscal}
-        **Clave Ciudad**: {self.clave_ciudad}
+        **Clave ARCA**: {self.clave_fiscal}  
+        **Clave Ciudad**: {self.clave_ciudad}  
         **Domicilio**: {self.domicilio}
         """
 

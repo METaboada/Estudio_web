@@ -3,13 +3,14 @@ import streamlit as st
 st.set_page_config(
     page_title="Estudio Web",
     page_icon="favicon.png",
-    layout="centered"  # ⬅️ esta es la opción por defecto
+    layout="centered"
 )
 
-# ---- LOGIN ----
+# ---- INICIALIZAR SESSION_STATE ----
 if "autenticado" not in st.session_state:
     st.session_state["autenticado"] = False
 
+# ---- LOGIN ----
 if not st.session_state["autenticado"]:
     st.title("🔐 Ingreso a la aplicación")
 
@@ -20,11 +21,16 @@ if not st.session_state["autenticado"]:
         if usuario == st.secrets["auth"]["usuario"] and clave == st.secrets["auth"]["clave"]:
             st.session_state["autenticado"] = True
             st.success("✅ Bienvenido, acceso concedido")
-            st.rerun()  # <--- Esto es lo que te faltaba
-            
+            st.rerun()  # Esto recarga la app mostrando el contenido protegido
         else:
             st.error("❌ Usuario o contraseña incorrectos")
 
-    st.stop()  # No se muestra nada más si no está autenticado
+    st.stop()  # Detiene aquí si no está autenticado
 
+# ---- CONTENIDO PROTEGIDO: DASHBOARD / MENÚ ----
+st.title("🏠 Bienvenido al Estudio Web")
 
+st.markdown("Seleccioná una opción del menú de la izquierda o accedé a los reportes desde la sección correspondiente.")
+
+# Podés agregar contenido adicional acá, como accesos rápidos:
+st.info("🔗 También podés ir a la página de **Reportes** desde el menú de la izquierda.")

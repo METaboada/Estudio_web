@@ -12,11 +12,11 @@ def mostrar_home():
     st.title("🏢 Estudio Taboada")
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("👥 Clientes"):
+        if st.button("👥 Clientes", key="btn_clientes_home"):
             st.session_state["pagina"] = "Clientes"
             st.rerun()
     with col2:
-        if st.button("⚙️ Ir a Admin"):
+        if st.button("⚙️ Ir a Admin", key="btn_admin_home"):
             st.session_state["pagina"] = "Admin"
             st.rerun()
 
@@ -26,7 +26,7 @@ def mostrar_clientes():
     st.title("👥 Clientes")
     st.write("Esta es la página de inicio.")
 
-    if st.button("⬅️ Volver al inicio"):
+    if st.button("⬅️ Volver al inicio", key="btn_volver_clientes"):
         st.session_state["pagina"] = "Home"
         st.rerun()
 
@@ -43,20 +43,20 @@ def mostrar_admin():
     st.title("⚙️ Administración")
     st.write("Opciones de configuración y control del sistema.")
 
-    if st.button("⬅️ Volver al inicio"):
+    if st.button("⬅️ Volver al inicio", key="btn_volver_admin"):
         st.session_state["pagina"] = "Home"
         st.rerun()
 
 
 def menu_sidebar():
     st.sidebar.title("📚 Menú")
-    if st.sidebar.button("🏢 Estudio Taboada"):
+    if st.sidebar.button("🏢 Estudio Taboada", key="sidebar_home"):
         st.session_state["pagina"] = "Home"
-    if st.sidebar.button("👥 Clientes"):
+    if st.sidebar.button("👥 Clientes", key="sidebar_clientes"):
         st.session_state["pagina"] = "Clientes"
-    if st.sidebar.button("⚙️ Admin"):
+    if st.sidebar.button("⚙️ Admin", key="sidebar_admin"):
         st.session_state["pagina"] = "Admin"
-    if st.sidebar.button("🔒 Cerrar sesión"):
+    if st.sidebar.button("🔒 Cerrar sesión", key="sidebar_logout"):
         st.session_state["autenticado"] = False
         st.rerun()
 
@@ -72,7 +72,7 @@ def main():
         clave = st.text_input("Contraseña", type="password")
 
         usuarios = st.secrets["auth"]["usuarios"]
-        if st.button("Ingresar"):
+        if st.button("Ingresar", key="btn_ingresar"):
             if usuario in usuarios and clave == usuarios[usuario]:
                 st.session_state["autenticado"] = True
                 st.session_state["pagina"] = "Home"

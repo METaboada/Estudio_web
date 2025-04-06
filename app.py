@@ -135,15 +135,13 @@ def mostrar_reportes():
 
 
 def mostrar_admin():
-    
-    if st.button("⬅️ Volver al inicio"):
-        st.session_state["pagina"] = "Home"
-        st.rerun()
 
     st.title("⚙️ Administración")
     st.write("Opciones de configuración y control del sistema.")
 
-
+    if st.button("⬅️ Volver al inicio"):
+        st.session_state["pagina"] = "Home"
+        st.rerun()
 
 
 def menu_sidebar():

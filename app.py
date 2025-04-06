@@ -62,7 +62,7 @@ def mostrar_clientes():
             cursor = conexion.cursor(dictionary=True)
 
             query = """
-                SELECT id_cliente, nombre, cuit FROM clientes 
+                SELECT * FROM clientes 
                 WHERE nombre LIKE %s OR cuit LIKE %s
             """
             like_pattern = f"%{cliente}%"

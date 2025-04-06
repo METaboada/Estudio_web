@@ -2,8 +2,8 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Estudio Web",
-    page_icon="favicon.png",  # o un emoji, por ejemplo "🚀"
-    layout="wide"
+    page_icon="favicon.png",
+    layout="centered"  # ⬅️ esta es la opción por defecto
 )
 
 # ---- LOGIN ----

@@ -1,49 +1,54 @@
 import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
 
-st.set_page_config(
-    page_title="Estudio Web",
-    page_icon="favicon.png",
-    layout="centered"
-)
+# --- CONFIGURACIÓN INICIAL ---
+st.set_page_config(page_title="Estudio Web", page_icon="favicon.png", layout="centered")
 
-# # ---- INICIALIZAR SESSION_STATE ----
-# if "autenticado" not in st.session_state:
-#     st.session_state["autenticado"] = False
-
+# --- OCULTAR BARRA LATERAL Y MENÚ SUPERIOR SI NO ESTÁ LOGUEADO ---
 if "autenticado" not in st.session_state or not st.session_state["autenticado"]:
-    # Ocultar barra lateral y menú superior hasta que esté autenticado
-    hide_menu = """
+    st.markdown("""
         <style>
-        [data-testid="stSidebar"] {display: none;}
-        header {visibility: hidden;}
+        [data-testid="stSidebar"] { display: none; }
+        header { visibility: hidden; }
         </style>
-    """
-    st.markdown(hide_menu, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
+# --- INICIALIZAR ESTADO ---
+if "autenticado" not in st.session_state:
+    st.session_state["autenticado"] = False
 
-
-
-# ---- LOGIN ----
+# --- LOGIN ---
 if not st.session_state["autenticado"]:
     st.title("🔐 Ingreso a la aplicación")
-
     usuario = st.text_input("Usuario")
     clave = st.text_input("Contraseña", type="password")
-
     if st.button("Ingresar"):
         if usuario == st.secrets["auth"]["usuario"] and clave == st.secrets["auth"]["clave"]:
             st.session_state["autenticado"] = True
-            st.success("✅ Bienvenido, acceso concedido")
-            st.rerun()  # Esto recarga la app mostrando el contenido protegido
+            st.rerun()
         else:
             st.error("❌ Usuario o contraseña incorrectos")
+    st.stop()
 
-    st.stop()  # Detiene aquí si no está autenticado
+# --- MENÚ INTERNO PERSONALIZADO ---
+st.title("🏠 Estudio Web")
+menu = st.radio("Navegá por la aplicación", ["Inicio", "Reportes"], horizontal=True)
 
-# ---- CONTENIDO PROTEGIDO: DASHBOARD / MENÚ ----
-st.title("🏠 Bienvenido al Estudio Web")
+# --- CONTENIDO SEGÚN SELECCIÓN ---
+if menu == "Inicio":
+    st.subheader("📌 Página de inicio")
+    st.write("Seleccioná una opción del menú superior.")
+elif menu == "Reportes":
+    st.subheader("📊 Reportes de Ventas")
+    df = pd.DataFrame({
+        "Mes": ["Enero", "Febrero", "Marzo", "Abril"],
+        "Ventas": [12000, 15000, 13000, 17000]
+    })
+    st.dataframe(df, use_container_width=True)
 
-st.markdown("Seleccioná una opción del menú de la izquierda o accedé a los reportes desde la sección correspondiente.")
-
-# Podés agregar contenido adicional acá, como accesos rápidos:
-st.info("🔗 También podés ir a la página de **Reportes** desde el menú de la izquierda.")
+    fig, ax = plt.subplots()
+    ax.plot(df["Mes"], df["Ventas"], marker='o')
+    ax.set_title("Ventas mensuales")
+    ax.set_ylabel("Monto")
+    st.pyplot(fig)

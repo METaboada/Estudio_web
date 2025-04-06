@@ -34,10 +34,9 @@ class Cliente:
     
     def mostrar_resumen(self):
         return f"""
-        **Domicilio**: {self.domicilio}  
-        **Carpeta**: {self.carpeta}  
-        **Base de datos**: {self.nombase}  
-        **Punto de venta**: {self.ptovta}  
+        **Clave ARCA**: {self.clave_fiscal}
+        **Clave Ciudad**: {self.clave_ciudad}  
+        **Domicilio**: {self.domicilio}
         """
 
     def validar_cuit(self):

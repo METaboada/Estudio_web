@@ -23,8 +23,13 @@ from utils.db import obtener_clientes
 from clases.cliente import Cliente
 
 
+
 def mostrar_clientes():
     st.title("📁 Gestión de Clientes")
+
+    if st.button("⬅️ Volver al inicio", key="btn_volver_admin"):
+        st.session_state["pagina"] = "Home"
+        st.rerun()
 
     filtro = st.text_input("🔍 Buscar cliente por nombre o CUIT")
     if not filtro:

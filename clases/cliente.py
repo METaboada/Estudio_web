@@ -34,7 +34,7 @@ class Cliente:
     
     def mostrar_resumen(self):
         return f"""
-        **CUIT**: {self.cuit}	
+        **CUIT**: {self.cuit}  
         **Clave ARCA**: {self.clave_fiscal}  
         **Clave Ciudad**: {self.clave_ciudad}  
         **Domicilio**: {self.domicilio}

@@ -37,7 +37,7 @@ class Cliente:
         **CUIT**: {self.cuit}  
         **Clave ARCA**: {self.clave_fiscal}  
         **Clave Ciudad**: {self.clave_ciudad}  
-        **Domicilio**: {self.domicilio}
+        **Clave Rúbrica**: {self.clave_rubrica_digital_caba}
         """
 
     def validar_cuit(self):
